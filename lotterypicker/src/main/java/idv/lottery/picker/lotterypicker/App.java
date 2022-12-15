@@ -1,8 +1,10 @@
 package idv.lottery.picker.lotterypicker;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import idv.lottery.picker.lotterypicker.stage.ActionSkd;
 import idv.lottery.picker.lotterypicker.stage.BaseAction;
@@ -14,33 +16,61 @@ import idv.lottery.picker.lotterypicker.stage.BaseAction;
 public class App {
 	final static String START = "start";
 	static Timer timer;
-	static TestAction act = new TestAction();
+	static ActionSkd task = new ActionSkd();
 
 	static class TestAction extends BaseAction {
-		int i;
+		String name;
+
+		public void setName(String name) {
+			this.name = name;
+		}
 
 		@Override
 		public void start() {
-			System.out.println("V2 Start!");
+			System.out.println("V3 Start!");
 		}
 
 		@Override
 		public void update() {
-			System.out.printf("Show time-%d\n", ++i);
-			if (i >= 10) {
-				this.destroy();
-			}
+			System.out.printf("This is %s\n", name);
+			this.destroy();
 		}
 
 		@Override
 		public void end() {
-			System.out.println("Destroying!");
+			System.out.printf("Destroy by %s\n", name);
+		}
+
+	}
+
+	static class CountDownAction extends BaseAction {
+		int i = 3;
+		List<TestAction> testActs = new ArrayList<>(0);
+
+		public void addTestAction(TestAction act) {
+			this.testActs.add(act);
+		}
+
+		@Override
+		public void start() {
+			System.out.println("Show time!");
+		}
+
+		@Override
+		public void update() {
+			System.out.println(i--);
+			if (i == 0) {
+				testActs.forEach(TestAction::spawn);
+				this.destroy();
+			}
 		}
 
 	}
 
 	public static void main(String[] args) {
 		init();
+		CountDownAction cntAct = new CountDownAction();
+		prepareTestActions(task, cntAct);
 
 		System.out.println("Welcome to Lottery World");
 		System.out.printf("Please input %s\n", START);
@@ -52,7 +82,8 @@ public class App {
 			input = sc.nextLine();
 			if (input.equalsIgnoreCase(START)) {
 				System.out.println("It is game time!");
-				act.spawn();
+
+				cntAct.spawn();
 			} else {
 				System.out.println("Nothing happen");
 			}
@@ -61,9 +92,23 @@ public class App {
 	}
 
 	static void init() {
-
-		TimerTask task = new ActionSkd(act);
 		timer = new Timer();
 		timer.schedule(task, 1000, 200);
 	}
+
+	static void prepareTestActions(ActionSkd task, CountDownAction cntAct) {
+		TestAction act = new TestAction();
+		act.setName("David");
+		cntAct.addTestAction(act);
+		task.addAction(act);
+
+		TestAction act2 = new TestAction();
+		act2.setName("Mary");
+		cntAct.addTestAction(act2);
+		task.addAction(act2);
+		
+		task.addAction(cntAct);
+
+	}
+
 }

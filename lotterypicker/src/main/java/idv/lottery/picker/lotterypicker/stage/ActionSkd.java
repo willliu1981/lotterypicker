@@ -1,37 +1,51 @@
 package idv.lottery.picker.lotterypicker.stage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TimerTask;
 
 public class ActionSkd extends TimerTask {
 
-	Action act;
+	List<Action> actions = new ArrayList<>();
 	boolean isStarted;
 	boolean isEnded;
 	boolean isFinalEnded;
 
-	public ActionSkd(Action act) {
+	public ActionSkd() {
 		super();
-		this.act = act;
+	}
+
+	public void addAction(Action act) {
+		this.actions.add(act);
 	}
 
 	@Override
 	public void run() {
-		if (act.isSpawned()) {
 
-			if (!isStarted) {
-				act.start();
-				isStarted = true;
-			}
+		Action act = null;
+		if (!actions.isEmpty()) {
+			for (int i = 0; i < actions.size(); i++) {
+				act = actions.get(i);
 
-			if (!act.isEnded()) {
-				act.update();
-			}
+				if (act.isSpawned()) {
 
-			if (act.isEnded() && !isFinalEnded) {
-				act.end();
-				isFinalEnded = true;
+					if (!isStarted) {
+						act.start();
+						isStarted = true;
+					}
+
+					if (!act.isEnded()) {
+						act.update();
+					}
+
+					if (act.isEnded() && !isFinalEnded) {
+						act.end();
+						isFinalEnded = true;
+					}
+				}
 			}
 		}
+
 	}
 
 }
