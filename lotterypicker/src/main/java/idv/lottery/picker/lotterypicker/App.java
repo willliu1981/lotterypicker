@@ -4,8 +4,8 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import idv.lottery.picker.lotterypicker.stage.Action;
 import idv.lottery.picker.lotterypicker.stage.ActionSkd;
+import idv.lottery.picker.lotterypicker.stage.BaseAction;
 
 /**
  * Hello world!
@@ -16,41 +16,25 @@ public class App {
 	static Timer timer;
 	static TestAction act = new TestAction();
 
-	static class TestAction implements Action {
+	static class TestAction extends BaseAction {
 		int i;
-		boolean isSpawned;
-		boolean isEnded;
-
-		public void spawn() {
-			this.isSpawned = true;
-		}
 
 		@Override
 		public void start() {
-			System.out.println("Start!");
+			System.out.println("V2 Start!");
 		}
 
 		@Override
 		public void update() {
-			System.out.printf("Show time! (%d times)\n", i++);
+			System.out.printf("Show time-%d\n", ++i);
 			if (i >= 10) {
-				isEnded = true;
+				this.destroy();
 			}
 		}
 
 		@Override
 		public void end() {
-			System.out.println("See you next time!");
-		}
-
-		@Override
-		public boolean isEnded() {
-			return isEnded;
-		}
-
-		@Override
-		public boolean isSpawned() {
-			return isSpawned;
+			System.out.println("Destroying!");
 		}
 
 	}
