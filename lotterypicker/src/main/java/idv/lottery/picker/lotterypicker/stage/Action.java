@@ -5,5 +5,7 @@ public interface Action   {
 	void start();
 	void update();
 	void end();
+	boolean isStarted();
 	boolean isEnded();
+	boolean isFinalEnded();
 }

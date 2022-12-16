@@ -106,7 +106,7 @@ public class App {
 		act2.setName("Mary");
 		cntAct.addTestAction(act2);
 		task.addAction(act2);
-		
+
 		task.addAction(cntAct);
 
 	}

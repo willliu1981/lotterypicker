@@ -6,41 +6,49 @@ import java.util.TimerTask;
 
 public class ActionSkd extends TimerTask {
 
-	List<Action> actions = new ArrayList<>();
-	boolean isStarted;
-	boolean isEnded;
-	boolean isFinalEnded;
+	List<ActionWrap> wraps = new ArrayList<>();
+
+	public static class ActionWrap {
+		Action act;
+		boolean isStarted;
+		boolean isFinalEnded;
+
+		public ActionWrap(Action act) {
+			super();
+			this.act = act;
+		}
+
+	}
 
 	public ActionSkd() {
 		super();
 	}
 
 	public void addAction(Action act) {
-		this.actions.add(act);
+		ActionWrap wrap = new ActionWrap(act);
+		this.wraps.add(wrap);
 	}
 
 	@Override
 	public void run() {
 
-		Action act = null;
-		if (!actions.isEmpty()) {
-			for (int i = 0; i < actions.size(); i++) {
-				act = actions.get(i);
+		if (!wraps.isEmpty()) {
+			for (int i = 0; i < wraps.size(); i++) {
+				ActionWrap wrap = wraps.get(i);
 
-				if (act.isSpawned()) {
-
-					if (!isStarted) {
-						act.start();
-						isStarted = true;
+				if (wrap.act.isSpawned()) {
+					if (!wrap.isStarted) {
+						wrap.act.start();
+						wrap.isStarted = true;
 					}
 
-					if (!act.isEnded()) {
-						act.update();
+					if (!wrap.act.isEnded()) {
+						wrap.act.update();
 					}
 
-					if (act.isEnded() && !isFinalEnded) {
-						act.end();
-						isFinalEnded = true;
+					if (wrap.act.isEnded() && !wrap.isFinalEnded) {
+						wrap.act.end();
+						wrap.isFinalEnded = true;
 					}
 				}
 			}
