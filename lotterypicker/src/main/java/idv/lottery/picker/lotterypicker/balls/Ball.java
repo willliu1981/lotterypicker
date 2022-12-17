@@ -1,11 +1,13 @@
 package idv.lottery.picker.lotterypicker.balls;
 
+import java.awt.Color;
 import java.awt.Point;
 
 public abstract class Ball {
 	String Name;
 	Integer number;
 	Point location;
+	Color coler;
 
 	public Ball(String name, Integer number) {
 		super();
@@ -25,9 +27,16 @@ public abstract class Ball {
 		return Name;
 	}
 
-	public void setName(String name) {
-		Name = name;
+	public Integer getNumber() {
+		return number;
 	}
 
-	
+	public Color getColer() {
+		return coler;
+	}
+
+	public void setColer(Color coler) {
+		this.coler = coler;
+	}
+
 }

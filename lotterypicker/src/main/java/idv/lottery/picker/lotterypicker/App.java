@@ -1,12 +1,13 @@
 package idv.lottery.picker.lotterypicker;
 
+import java.awt.Point;
 import java.util.Scanner;
 import java.util.Timer;
 
 import idv.lottery.picker.lotterypicker.balls.Ball;
 import idv.lottery.picker.lotterypicker.balls.MainBall;
 import idv.lottery.picker.lotterypicker.stage.ActionSkd;
-import idv.lottery.picker.lotterypicker.stage.PickerAction;
+import idv.lottery.picker.lotterypicker.stage.BallAction;
 
 /**
  * Hello world!
@@ -44,11 +45,12 @@ public class App {
 	}
 
 	static void preparePickerAction(ActionSkd task) {
-		PickerAction act = null;
+		BallAction act = null;
 		Ball ball = null;
-		for (int i = 1; i <= 49; i++) {
+		for (int i = 1; i <= 1; i++) {
 			ball = new MainBall(String.format("no.%d", i), i);
-			act = new PickerAction();
+			ball.setLocation(new Point(0,0));
+			act = new BallAction();
 			act.setBall(ball);
 			task.addAction(act);
 			act.spawn();
