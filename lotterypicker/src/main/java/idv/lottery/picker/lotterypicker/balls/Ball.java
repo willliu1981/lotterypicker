@@ -21,4 +21,13 @@ public abstract class Ball {
 		this.location = location;
 	}
 
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	
 }
