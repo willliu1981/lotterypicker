@@ -8,6 +8,7 @@ public abstract class Ball {
 	Integer number;
 	Point location;
 	Color coler;
+	Double direction;
 
 	public Ball(String name, Integer number) {
 		super();
@@ -37,6 +38,14 @@ public abstract class Ball {
 
 	public void setColer(Color coler) {
 		this.coler = coler;
+	}
+
+	public Double getDirection() {
+		return direction;
+	}
+
+	public void setDirection(Double direction) {
+		this.direction = direction;
 	}
 
 }
