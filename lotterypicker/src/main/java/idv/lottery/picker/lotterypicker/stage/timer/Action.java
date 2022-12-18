@@ -1,4 +1,4 @@
-package idv.lottery.picker.lotterypicker.stage;
+package idv.lottery.picker.lotterypicker.stage.timer;
 
 public interface Action   {
 	boolean isSpawned();

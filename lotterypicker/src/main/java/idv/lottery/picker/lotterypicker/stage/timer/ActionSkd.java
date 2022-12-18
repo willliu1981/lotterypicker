@@ -1,8 +1,10 @@
-package idv.lottery.picker.lotterypicker.stage;
+package idv.lottery.picker.lotterypicker.stage.timer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
+
+import idv.lottery.picker.lotterypicker.stage.view.MainView;
 
 public class ActionSkd extends TimerTask {
 
@@ -53,6 +55,8 @@ public class ActionSkd extends TimerTask {
 				}
 			}
 		}
+
+		MainView.stage.repaint();
 
 	}
 

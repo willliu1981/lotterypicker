@@ -1,16 +1,16 @@
-package idv.lottery.picker.lotterypicker.stage;
+package idv.lottery.picker.lotterypicker.stage.timer;
 
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import idv.lottery.picker.lotterypicker.balls.Ball;
-import idv.lottery.picker.lotterypicker.balls.DefaultBall;
+import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
+import idv.lottery.picker.lotterypicker.gameobjects.balls.DefaultBall;
 import idv.lottery.picker.lotterypicker.graphic.Graphics;
 import idv.lottery.picker.lotterypicker.graphic.Ray;
 
 public class BallAction extends PickerAction {
 	Rectangle wallRect = new Rectangle(200, 200);
-	Ball ball;
+	GameObject ball;
 	double velocity;
 
 	@Override
@@ -26,13 +26,13 @@ public class BallAction extends PickerAction {
 	@Override
 	public void update() {
 		Point next = Graphics.nextLocation(ball.getLocation(), ball.getDirection(), this.velocity);
-		System.out.printf("after:ball=%s, p=%s, dir=%s\n", ball.getName(), ball.getLocation(), ball.getDirection());
-		System.out.println("next=" + next);
+		////System.out.printf("after:ball=%s, p=%s, dir=%s\n", ball.getName(), ball.getLocation(), ball.getDirection());
+		////System.out.println("next=" + next);
 		Ray ray = new Ray(ball, this.velocity);
-		Ball result = new DefaultBall();
-		boolean isCollided = Graphics.collide(result, ray, wallRect);
+		GameObject result = new DefaultBall();
+		boolean isCollided = Graphics.wallCollide(result, ray, wallRect);
 		if (isCollided) {
-			System.out.println("flag!!!");
+			////System.out.println("flag!!!");
 			ball.setLocation(result.getLocation());
 			ball.setDirection(result.getDirection());
 		} else {
@@ -41,11 +41,11 @@ public class BallAction extends PickerAction {
 
 	}
 
-	public Ball getBall() {
+	public GameObject getBall() {
 		return ball;
 	}
 
-	public void setBall(Ball ball) {
+	public void setBall(GameObject ball) {
 		this.ball = ball;
 	}
 

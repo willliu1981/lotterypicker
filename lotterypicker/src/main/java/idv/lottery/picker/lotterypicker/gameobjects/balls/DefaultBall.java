@@ -1,4 +1,4 @@
-package idv.lottery.picker.lotterypicker.balls;
+package idv.lottery.picker.lotterypicker.gameobjects.balls;
 
 import java.awt.Color;
 import java.awt.Point;

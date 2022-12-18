@@ -3,7 +3,7 @@ package idv.lottery.picker.lotterypicker.graphic;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import idv.lottery.picker.lotterypicker.balls.Ball;
+import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
 
 public class Graphics {
 	/**
@@ -22,7 +22,7 @@ public class Graphics {
 		return p1;
 	}
 
-	static public boolean collide(Ball result, Ray ray, Rectangle wall) {
+	static public boolean wallCollide(GameObject result, Ray ray, Rectangle wall) {
 
 		int i = 1;
 		Point p = null;
@@ -40,7 +40,7 @@ public class Graphics {
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 4) || inQuadrant(ray.getDirection(), 1)) {
 						cldDst = getDistance(ray.p0, p);
-						System.out.printf("1)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
+						////System.out.printf("1)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
 						if (cldDst < nextDst && (currMixDistance == 0 || cldDst <= currMixDistance)) {
 							currMixDistance = cldDst;
 							collidedPoint = p;
@@ -56,7 +56,7 @@ public class Graphics {
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 1) || inQuadrant(ray.getDirection(), 2)) {
 						cldDst = getDistance(ray.p0, p);
-						System.out.printf("2)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
+						////System.out.printf("2)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
 						if (cldDst < nextDst && (currMixDistance == 0 || cldDst <= currMixDistance)) {
 							currMixDistance = cldDst;
 							collidedPoint = p;
@@ -72,7 +72,7 @@ public class Graphics {
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 2) || inQuadrant(ray.getDirection(), 3)) {
 						cldDst = getDistance(ray.p0, p);
-						System.out.printf("3)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
+						////System.out.printf("3)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
 						if (cldDst < nextDst && (currMixDistance == 0 || cldDst <= currMixDistance)) {
 							currMixDistance = cldDst;
 							collidedPoint = p;
@@ -88,7 +88,7 @@ public class Graphics {
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 3) || inQuadrant(ray.getDirection(), 4)) {
 						cldDst = getDistance(ray.p0, p);
-						System.out.printf("4)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
+						////System.out.printf("4)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
 						if (cldDst < nextDst && (currMixDistance == 0 || cldDst <= currMixDistance)) {
 							currMixDistance = cldDst;
 							collidedPoint = p;
