@@ -26,26 +26,32 @@ public class GameObject {
 	}
 
 	public void attach(GameObject newParent) {
-		System.out.println("name2= "+this.getName());
+		////System.out.println("type=" + this.getClass().getName());
 		this.parentGO.removeGameObject(this);
 		newParent.addGameObject(this);
 		this.parentGO = newParent;
+		////System.out.println("?1=" + this.parentGO.getGOList().size());
+		////System.out.println("?2=" + this.parentGO.getClass().getName());
 	}
 
 	private List<GameObject> getGOList() {
 		if (this.gameObjects == null) {
-			return new ArrayList<>();
+			return this.gameObjects= new ArrayList<>();
 		}
 		return this.gameObjects;
 	}
 
 	public void paintForEach(Graphics g, Painter painter) {
-		System.out.printf("name=%s, ?=%d\n ", this.getName(), this.getGOList().size());
+		////System.out.printf("name1=%s, ?=%d\n ", this.getName(), this.getGOList().size());
+		this.getGOList().forEach(
+				x -> System.out.printf("name(foreach)=%s, list size=%d\n ", x.getName(), this.getGOList().size()));
 		this.getGOList().forEach(x -> painter.paint(g, x));
 	}
 
 	public void addGameObject(GameObject element) {
 		this.getGOList().add(element);
+		System.out.println("?3=" + this.getClass().getName());
+		System.out.println("?3 size=" + this.getGOList().size());
 	}
 
 	public void removeGameObject(GameObject element) {
