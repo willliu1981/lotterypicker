@@ -8,7 +8,8 @@ public class BallPainter implements Painter {
 
 	@Override
 	public void paint(Graphics g, GameObject go) {
-		g.drawOval(go.getLocation().x * 2 + 400, go.getLocation().y * 2 + 400, 10, 10);
+		g.setColor(go.getColer());
+		g.fillOval((int) (go.getLocation().getX() * 2 + 400), (int) (go.getLocation().getY() * 2 + 400), 10, 10);
 	}
 
 }

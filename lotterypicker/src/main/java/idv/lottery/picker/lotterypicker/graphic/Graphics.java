@@ -14,33 +14,32 @@ public class Graphics {
 	 * @return 下一個目標位置
 	 */
 
-	static public Point nextLocation(Point p0, double d, double v) {
-		int px1 = (int) (p0.getX() + v * Math.cos(Math.toRadians(d)));
-		int py1 = (int) (p0.getY() + v * Math.sin(Math.toRadians(d)));
+	static public Location nextLocation(Location p0, double d, double v) {
+		double px1 = p0.getX() + v * Math.cos(Math.toRadians(d));
+		double py1 = p0.getY() + v * Math.sin(Math.toRadians(d));
 
-		Point p1 = new Point(px1, py1);
+		Location p1 = new Location(px1, py1);
 		return p1;
 	}
 
 	static public boolean wallCollide(GameObject result, Ray ray, Rectangle wall) {
 
 		int i = 1;
-		Point p = null;
+		Location p = null;
 		double currDirection = 0;
 		double currMixDistance = 0;
-		Point collidedPoint = null;
+		Location collidedPoint = null;
 		double nextDst = getDistance(ray.p0, ray.p1);
 		double cldDst = 0;
 		boolean isCollided = false;
 		while (i <= 4) {
 			switch (i) {
 			case 1:// wall top
-				p = collidePoint(ray.p0, ray.p1, new Point(wall.width * -1, wall.height * -1),
-						new Point(wall.width, wall.height * -1));
+				p = collidePoint(ray.p0, ray.p1, new Location(wall.width * -1, wall.height * -1),
+						new Location(wall.width, wall.height * -1));
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 4) || inQuadrant(ray.getDirection(), 1)) {
 						cldDst = getDistance(ray.p0, p);
-						////System.out.printf("1)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
 						if (cldDst < nextDst && (currMixDistance == 0 || cldDst <= currMixDistance)) {
 							currMixDistance = cldDst;
 							collidedPoint = p;
@@ -51,12 +50,11 @@ public class Graphics {
 				}
 				break;
 			case 2:// wall right
-				p = collidePoint(ray.p0, ray.p1, new Point(wall.width, wall.height * -1),
-						new Point(wall.width, wall.height));
+				p = collidePoint(ray.p0, ray.p1, new Location(wall.width, wall.height * -1),
+						new Location(wall.width, wall.height));
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 1) || inQuadrant(ray.getDirection(), 2)) {
 						cldDst = getDistance(ray.p0, p);
-						////System.out.printf("2)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
 						if (cldDst < nextDst && (currMixDistance == 0 || cldDst <= currMixDistance)) {
 							currMixDistance = cldDst;
 							collidedPoint = p;
@@ -67,12 +65,11 @@ public class Graphics {
 				}
 				break;
 			case 3:// wall bottom
-				p = collidePoint(ray.p0, ray.p1, new Point(wall.width * -1, wall.height),
-						new Point(wall.width, wall.height));
+				p = collidePoint(ray.p0, ray.p1, new Location(wall.width * -1, wall.height),
+						new Location(wall.width, wall.height));
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 2) || inQuadrant(ray.getDirection(), 3)) {
 						cldDst = getDistance(ray.p0, p);
-						////System.out.printf("3)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
 						if (cldDst < nextDst && (currMixDistance == 0 || cldDst <= currMixDistance)) {
 							currMixDistance = cldDst;
 							collidedPoint = p;
@@ -83,12 +80,12 @@ public class Graphics {
 				}
 				break;
 			case 4:// wall left
-				p = collidePoint(ray.p0, ray.p1, new Point(wall.width * -1, wall.height * -1),
-						new Point(wall.width * -1, wall.height));
+				p = collidePoint(ray.p0, ray.p1, new Location(wall.width * -1, wall.height * -1),
+						new Location(wall.width * -1, wall.height));
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 3) || inQuadrant(ray.getDirection(), 4)) {
 						cldDst = getDistance(ray.p0, p);
-						////System.out.printf("4)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
+						//// System.out.printf("4)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
 						if (cldDst < nextDst && (currMixDistance == 0 || cldDst <= currMixDistance)) {
 							currMixDistance = cldDst;
 							collidedPoint = p;
@@ -114,7 +111,7 @@ public class Graphics {
 
 	}
 
-	static public Point collidePoint(Point p1, Point p2, Point p3, Point p4) {
+	static public Location collidePoint(Location p1, Location p2, Location p3, Location p4) {
 		double A1 = p1.y - p2.y;
 		double B1 = p2.x - p1.x;
 		double C1 = A1 * p1.x + B1 * p1.y;
@@ -137,13 +134,12 @@ public class Graphics {
 		double x = a * C1 + b * C2;
 		double y = c * C1 + d * C2;
 
-		Point p = new Point();
-		p.setLocation(x, y);
+		Location p = new Location(x,y);
 
 		return p;
 	}
 
-	public static double getDistance(Point p0, Point p1) {
+	public static double getDistance(Location p0, Location p1) {
 		double w = p0.getX() - p1.getX();
 		double h = p0.getY() - p1.getY();
 		return Math.pow(w * w + h * h, 0.5);

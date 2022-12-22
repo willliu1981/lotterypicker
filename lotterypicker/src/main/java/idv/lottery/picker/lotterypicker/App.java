@@ -1,6 +1,5 @@
 package idv.lottery.picker.lotterypicker;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,12 +8,10 @@ import java.util.Timer;
 import org.junit.jupiter.api.Test;
 
 import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
-import idv.lottery.picker.lotterypicker.gameobjects.Scene;
 import idv.lottery.picker.lotterypicker.gameobjects.balls.MainBall;
-import idv.lottery.picker.lotterypicker.stage.timer.Action;
+import idv.lottery.picker.lotterypicker.graphic.Location;
 import idv.lottery.picker.lotterypicker.stage.timer.ActionSkd;
 import idv.lottery.picker.lotterypicker.stage.timer.BallAction;
-import idv.lottery.picker.lotterypicker.stage.timer.BaseAction;
 
 /**
  * Hello world!
@@ -48,20 +45,17 @@ public class App {
 
 	public static void init() {
 		timer = new Timer();
-		timer.schedule(task, 1000, 200);
+		timer.schedule(task, 1000, 10);
 	}
 
 	public static void preparePickerAction(ActionSkd task) {
 		BallAction act = null;
 		GameObject ball = null;
 
-		////act = new BallAction();
-		////act.setBall(Scene.getScene());
-		////task.addAction(act);
 
-		for (int i = 1; i <= 1; i++) {
+		for (int i = 1; i <= 49; i++) {
 			ball = new MainBall(String.format("no.%d", i), i);
-			ball.setLocation(new Point(0, 0));
+			ball.setLocation(new Location(0, 0));
 			act = new BallAction();
 			act.setBall(ball);
 			task.addAction(act);

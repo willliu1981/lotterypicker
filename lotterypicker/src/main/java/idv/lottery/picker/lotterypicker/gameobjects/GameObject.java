@@ -2,16 +2,16 @@ package idv.lottery.picker.lotterypicker.gameobjects;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import idv.lottery.picker.lotterypicker.graphic.Location;
 import idv.lottery.picker.lotterypicker.stage.timer.Painter;
 
 public class GameObject {
 
 	protected String Name;
-	protected Point location;
+	protected Location location;
 	protected Color coler;
 	protected Double direction;
 	protected List<GameObject> gameObjects;
@@ -26,12 +26,9 @@ public class GameObject {
 	}
 
 	public void attach(GameObject newParent) {
-		////System.out.println("type=" + this.getClass().getName());
 		this.parentGO.removeGameObject(this);
 		newParent.addGameObject(this);
 		this.parentGO = newParent;
-		////System.out.println("?1=" + this.parentGO.getGOList().size());
-		////System.out.println("?2=" + this.parentGO.getClass().getName());
 	}
 
 	private List<GameObject> getGOList() {
@@ -42,27 +39,22 @@ public class GameObject {
 	}
 
 	public void paintForEach(Graphics g, Painter painter) {
-		////System.out.printf("name1=%s, ?=%d\n ", this.getName(), this.getGOList().size());
-		this.getGOList().forEach(
-				x -> System.out.printf("name(foreach)=%s, list size=%d\n ", x.getName(), this.getGOList().size()));
 		this.getGOList().forEach(x -> painter.paint(g, x));
 	}
 
 	public void addGameObject(GameObject element) {
 		this.getGOList().add(element);
-		System.out.println("?3=" + this.getClass().getName());
-		System.out.println("?3 size=" + this.getGOList().size());
 	}
 
 	public void removeGameObject(GameObject element) {
 		this.getGOList().remove(element);
 	}
 
-	public Point getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 
-	public void setLocation(Point location) {
+	public void setLocation(Location location) {
 		this.location = location;
 	}
 

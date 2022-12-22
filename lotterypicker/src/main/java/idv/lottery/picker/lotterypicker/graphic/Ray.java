@@ -1,12 +1,10 @@
 package idv.lottery.picker.lotterypicker.graphic;
 
-import java.awt.Point;
-
 import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
 
 public class Ray {
-	Point p0;
-	Point p1;
+	Location p0;
+	Location p1;
 	Double direction;
 
 	public Ray(GameObject ball, double length) {
@@ -15,11 +13,11 @@ public class Ray {
 		this.direction = ball.getDirection();
 	}
 
-	public Point getP0() {
+	public Location getP0() {
 		return p0;
 	}
 
-	public Point getP1() {
+	public Location getP1() {
 		return p1;
 	}
 
