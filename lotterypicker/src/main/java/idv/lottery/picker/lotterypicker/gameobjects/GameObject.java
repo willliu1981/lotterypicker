@@ -19,21 +19,33 @@ public class GameObject {
 
 	public GameObject() {
 		super();
-		if (!(this instanceof Scene)) {
-			this.parentGO = Scene.getScene();
-			this.attach(Scene.getScene());
-		}
 	}
 
-	public void attach(GameObject newParent) {
-		this.parentGO.removeGameObject(this);
-		newParent.addGameObject(this);
-		this.parentGO = newParent;
+	public GameObject(GameObject parentGO) {
+		super();
+
+		this.parentGO = parentGO;
+	}
+
+	private GameObject getParentGO() {
+		if (this.parentGO == null) {
+			this.parentGO = Scene.getScene();
+			this.attachTo(Scene.getScene());
+		}
+		return this.parentGO;
+	}
+
+	public void attachTo(GameObject newParent) {
+		if(!(this instanceof Scene)) {
+			this.getParentGO().removeGameObject(this);
+			newParent.addGameObject(this);
+			this.parentGO = newParent;
+		}
 	}
 
 	private List<GameObject> getGOList() {
 		if (this.gameObjects == null) {
-			return this.gameObjects= new ArrayList<>();
+			return this.gameObjects = new ArrayList<>();
 		}
 		return this.gameObjects;
 	}

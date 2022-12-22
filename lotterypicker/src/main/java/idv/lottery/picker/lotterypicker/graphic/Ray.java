@@ -25,4 +25,9 @@ public class Ray {
 		return direction;
 	}
 
+	@Override
+	public String toString() {
+		return "Ray [p0=" + p0 + ", p1=" + p1 + ", direction=" + direction + "]";
+	}
+
 }

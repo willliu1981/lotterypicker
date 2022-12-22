@@ -8,6 +8,7 @@ import java.util.Timer;
 import org.junit.jupiter.api.Test;
 
 import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
+import idv.lottery.picker.lotterypicker.gameobjects.Scenes;
 import idv.lottery.picker.lotterypicker.gameobjects.balls.MainBall;
 import idv.lottery.picker.lotterypicker.graphic.Location;
 import idv.lottery.picker.lotterypicker.stage.timer.ActionSkd;
@@ -52,10 +53,10 @@ public class App {
 		BallAction act = null;
 		GameObject ball = null;
 
-
 		for (int i = 1; i <= 49; i++) {
 			ball = new MainBall(String.format("no.%d", i), i);
 			ball.setLocation(new Location(0, 0));
+			Scenes.createGameObjectInScene(ball);
 			act = new BallAction();
 			act.setBall(ball);
 			task.addAction(act);

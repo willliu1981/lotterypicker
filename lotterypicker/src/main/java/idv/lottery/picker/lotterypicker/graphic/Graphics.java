@@ -1,7 +1,8 @@
 package idv.lottery.picker.lotterypicker.graphic;
 
-import java.awt.Point;
 import java.awt.Rectangle;
+
+import org.junit.jupiter.api.Test;
 
 import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
 
@@ -85,7 +86,6 @@ public class Graphics {
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 3) || inQuadrant(ray.getDirection(), 4)) {
 						cldDst = getDistance(ray.p0, p);
-						//// System.out.printf("4)nextDst=%s, cldDst=%s\n", nextDst, cldDst);
 						if (cldDst < nextDst && (currMixDistance == 0 || cldDst <= currMixDistance)) {
 							currMixDistance = cldDst;
 							collidedPoint = p;
@@ -134,7 +134,7 @@ public class Graphics {
 		double x = a * C1 + b * C2;
 		double y = c * C1 + d * C2;
 
-		Location p = new Location(x,y);
+		Location p = new Location(x, y);
 
 		return p;
 	}
@@ -146,13 +146,14 @@ public class Graphics {
 	}
 
 	public static boolean inQuadrant(double d, int q) {
+		d %= 360;
 		if (d < 0) {
 			d += 360;
 		}
 
 		switch (q) {
 		case 1:
-			if (d > 270 && d < 360) {
+			if (d >= 270 && d <= 360) {
 				return true;
 			}
 			break;
@@ -174,6 +175,13 @@ public class Graphics {
 		}
 
 		return false;
+	}
+
+	@Test
+	public void test() {
+
+		System.out.println(inQuadrant(-90, 1));
+
 	}
 
 }
