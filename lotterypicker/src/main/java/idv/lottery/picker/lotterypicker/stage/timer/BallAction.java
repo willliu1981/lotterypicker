@@ -8,6 +8,7 @@ import idv.lottery.picker.lotterypicker.gameobjects.balls.DefaultBall;
 import idv.lottery.picker.lotterypicker.graphic.Graphics;
 import idv.lottery.picker.lotterypicker.graphic.Location;
 import idv.lottery.picker.lotterypicker.graphic.Ray;
+import idv.lottery.picker.lotterypicker.stage.view.MainView;
 
 public class BallAction extends PickerAction {
 	static Rectangle wallRect = new Rectangle(-200, -200, 400, 400);
@@ -40,15 +41,11 @@ public class BallAction extends PickerAction {
 			ball.setLocation(next);
 		}
 
-		if (i>200 && Graphics.outletCollide(ray, outletRect)) {
-			System.out.println("b act " + this.ball.getName());
+		if (i > 200 && Graphics.outletCollide(ray, outletRect)) {
 			this.destroy();
+			MainView.add_Qualfiy_For_Next_Round(this.getBall().getName());
 		}
 		i++;
-		
-		if(i<200) {
-			System.out.println("b act "+i);
-		}
 
 	}
 

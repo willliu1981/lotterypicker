@@ -7,9 +7,11 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -24,6 +26,8 @@ public class MainView extends JFrame {
 	private JLabel lblMsg;
 
 	Scene scene = Scene.getScene();
+	static private JList list;
+	static private DefaultListModel model=new DefaultListModel ();
 
 	/**
 	 * Launch the application.
@@ -84,6 +88,22 @@ public class MainView extends JFrame {
 		lblMsg = new JLabel("message");
 		lblMsg.setFont(new Font("新細明體", Font.PLAIN, 18));
 		panel_2.add(lblMsg);
+		
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1, BorderLayout.EAST);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		list = new JList(model);
+		list.setFont(new Font("新細明體", Font.PLAIN, 18));
+		panel_1.add(list);
+		
+		JLabel lblNewLabel = new JLabel("order");
+		lblNewLabel.setFont(new Font("新細明體", Font.PLAIN, 24));
+		panel_1.add(lblNewLabel, BorderLayout.NORTH);
+	}
+	
+	public static void add_Qualfiy_For_Next_Round(String ballName) {
+		model.addElement(ballName);
 	}
 
 }
