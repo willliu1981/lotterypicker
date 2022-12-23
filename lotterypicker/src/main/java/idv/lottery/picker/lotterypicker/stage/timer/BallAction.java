@@ -1,7 +1,6 @@
 package idv.lottery.picker.lotterypicker.stage.timer;
 
 import java.awt.Color;
-import java.awt.Point;
 import java.awt.Rectangle;
 
 import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
@@ -15,6 +14,7 @@ public class BallAction extends PickerAction {
 	static Rectangle outletRect = new Rectangle(-10, -10, 20, 20);
 	GameObject ball;
 	double velocity;
+	int i;
 
 	@Override
 	public void spawn() {
@@ -38,6 +38,16 @@ public class BallAction extends PickerAction {
 			ball.setDirection(result.getDirection());
 		} else {
 			ball.setLocation(next);
+		}
+
+		if (i>200 && Graphics.outletCollide(ray, outletRect)) {
+			System.out.println("b act " + this.ball.getName());
+			this.destroy();
+		}
+		i++;
+		
+		if(i<200) {
+			System.out.println("b act "+i);
 		}
 
 	}

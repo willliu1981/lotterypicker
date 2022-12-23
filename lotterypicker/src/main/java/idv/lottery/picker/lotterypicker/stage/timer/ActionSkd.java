@@ -2,7 +2,10 @@ package idv.lottery.picker.lotterypicker.stage.timer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.TimerTask;
+
+import org.junit.jupiter.api.Test;
 
 import idv.lottery.picker.lotterypicker.stage.view.MainView;
 
@@ -52,11 +55,29 @@ public class ActionSkd extends TimerTask {
 						wrap.act.end();
 						wrap.isFinalEnded = true;
 					}
+
+					if (wrap.isFinalEnded) {
+						this.wraps.remove(wrap);
+					}
 				}
 			}
 		}
 
 		MainView.stage.repaint();
+
+	}
+
+	@Test
+	public void test() {
+		Action a1 = new BallAction();
+		Action a2 = new BallAction();
+
+		this.addAction(a1);
+		this.addAction(a2);
+
+		System.out.println("b " + this.wraps.size());
+
+		System.out.println("f " + this.wraps.size());
 
 	}
 
