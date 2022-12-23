@@ -111,14 +111,68 @@ public class Graphics {
 
 	}
 
-	static public Location collidePoint(Location p1, Location p2, Location p3, Location p4) {
-		double A1 = p1.y - p2.y;
-		double B1 = p2.x - p1.x;
-		double C1 = A1 * p1.x + B1 * p1.y;
+	static public boolean outletCollide(Ray ray, Rectangle outlet) {
 
-		double A2 = p3.y - p4.y;
-		double B2 = p4.x - p3.x;
-		double C2 = A2 * p3.x + B2 * p3.y;
+		Location cp = null;
+		double distance = 0;
+		double nextDst = getDistance(ray.p0, ray.p1);
+		int i = 0;
+		while (i < 4) {
+			switch (i) {
+			case 1:
+				cp = collidePoint(ray.p0, ray.p1, new Location(outlet.x, outlet.y),
+						new Location(outlet.x + outlet.width, outlet.y));
+				if (cp.x >= outlet.x && cp.x <= outlet.x + outlet.width) {
+					distance = getDistance(ray.p0, cp);
+					if (distance < nextDst) {
+						return true;
+					}
+				}
+				break;
+			case 2:
+				cp = collidePoint(ray.p0, ray.p1, new Location(outlet.x + outlet.width, outlet.y),
+						new Location(outlet.x + outlet.width, outlet.y + outlet.height));
+				if (cp.y >= outlet.y && cp.y <= outlet.y + outlet.height) {
+					distance = getDistance(ray.p0, cp);
+					if (distance < nextDst) {
+						return true;
+					}
+				}
+				break;
+			case 3:
+				cp = collidePoint(ray.p0, ray.p1, new Location(outlet.x, outlet.y + outlet.height),
+						new Location(outlet.x + outlet.width, outlet.y + outlet.height));
+				if (cp.x >= outlet.x && cp.x <= outlet.x + outlet.width) {
+					distance = getDistance(ray.p0, cp);
+					if (distance < nextDst) {
+						return true;
+					}
+				}
+				break;
+			case 4:
+				cp = collidePoint(ray.p0, ray.p1, new Location(outlet.x, outlet.y),
+						new Location(outlet.x, outlet.y + outlet.height));
+				if (cp.y >= outlet.y && cp.y <= outlet.y + outlet.height) {
+					distance = getDistance(ray.p0, cp);
+					if (distance < nextDst) {
+						return true;
+					}
+				}
+				break;
+			}
+			i++;
+		}
+		return false;
+	}
+
+	static public Location collidePoint(Location rayP1, Location rayP2, Location targetP1, Location targetP2) {
+		double A1 = rayP1.y - rayP2.y;
+		double B1 = rayP2.x - rayP1.x;
+		double C1 = A1 * rayP1.x + B1 * rayP1.y;
+
+		double A2 = targetP1.y - targetP2.y;
+		double B2 = targetP2.x - targetP1.x;
+		double C2 = A2 * targetP1.x + B2 * targetP1.y;
 
 		double det_k = A1 * B2 - A2 * B1;
 
@@ -179,8 +233,21 @@ public class Graphics {
 
 	@Test
 	public void test() {
+		GameObject go = new GameObject();
+		go.setLocation(new Location(-20, -20));
+		go.setDirection(19.0);
 
-		System.out.println(inQuadrant(-90, 1));
+		Rectangle rect = new Rectangle();
+		rect.x = -10;
+		rect.y = -10;
+		rect.width = 20;
+		rect.height = 20;
+
+		Ray ray = new Ray(go, 30);
+
+		boolean flag = outletCollide(ray, rect);
+
+		System.out.println(flag);
 
 	}
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import idv.lottery.picker.lotterypicker.graphic.Location;
+import idv.lottery.picker.lotterypicker.stage.surfaces.Surface;
 import idv.lottery.picker.lotterypicker.stage.timer.Painter;
 
 public class GameObject {
@@ -16,6 +17,7 @@ public class GameObject {
 	protected Double direction;
 	protected List<GameObject> gameObjects;
 	protected GameObject parentGO;
+	protected Surface surface;
 
 	public GameObject() {
 		super();
@@ -36,7 +38,7 @@ public class GameObject {
 	}
 
 	public void attachTo(GameObject newParent) {
-		if(!(this instanceof Scene)) {
+		if (!(this instanceof Scene)) {
 			this.getParentGO().removeGameObject(this);
 			newParent.addGameObject(this);
 			this.parentGO = newParent;
@@ -92,6 +94,14 @@ public class GameObject {
 
 	public void setDirection(Double direction) {
 		this.direction = direction;
+	}
+
+	public Surface getSurface() {
+		return surface;
+	}
+
+	public void setSurface(Surface surface) {
+		this.surface = surface;
 	}
 
 }

@@ -21,7 +21,7 @@ public class BallAction extends PickerAction {
 
 		ball.setLocation(new Location(0, 0));
 		ball.setDirection(Math.random() * 360);
-		this.velocity = Math.random() * 3 + 1;
+		this.velocity = Math.random() * 10 + 2;
 		ball.setColer(new Color((int) (Math.random() * Math.pow(2, 31))));
 
 	}
