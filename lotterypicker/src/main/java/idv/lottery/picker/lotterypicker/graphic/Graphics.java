@@ -36,8 +36,8 @@ public class Graphics {
 		while (i <= 4) {
 			switch (i) {
 			case 1:// wall top
-				p = collidePoint(ray.p0, ray.p1, new Location(wall.width * -1, wall.height * -1),
-						new Location(wall.width, wall.height * -1));
+				p = collidePoint(ray.p0, ray.p1, new Location(wall.x, wall.y),
+						new Location(wall.x + wall.width, wall.y));
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 4) || inQuadrant(ray.getDirection(), 1)) {
 						cldDst = getDistance(ray.p0, p);
@@ -51,8 +51,8 @@ public class Graphics {
 				}
 				break;
 			case 2:// wall right
-				p = collidePoint(ray.p0, ray.p1, new Location(wall.width, wall.height * -1),
-						new Location(wall.width, wall.height));
+				p = collidePoint(ray.p0, ray.p1, new Location(wall.x + wall.width, wall.y),
+						new Location(wall.x + wall.width, wall.y + wall.height));
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 1) || inQuadrant(ray.getDirection(), 2)) {
 						cldDst = getDistance(ray.p0, p);
@@ -66,8 +66,8 @@ public class Graphics {
 				}
 				break;
 			case 3:// wall bottom
-				p = collidePoint(ray.p0, ray.p1, new Location(wall.width * -1, wall.height),
-						new Location(wall.width, wall.height));
+				p = collidePoint(ray.p0, ray.p1, new Location(wall.x, wall.y + wall.height),
+						new Location(wall.x + wall.width, wall.y + wall.height));
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 2) || inQuadrant(ray.getDirection(), 3)) {
 						cldDst = getDistance(ray.p0, p);
@@ -81,8 +81,8 @@ public class Graphics {
 				}
 				break;
 			case 4:// wall left
-				p = collidePoint(ray.p0, ray.p1, new Location(wall.width * -1, wall.height * -1),
-						new Location(wall.width * -1, wall.height));
+				p = collidePoint(ray.p0, ray.p1, new Location(wall.x, wall.y),
+						new Location(wall.x, wall.y + wall.height));
 				if (p != null) {
 					if (inQuadrant(ray.getDirection(), 3) || inQuadrant(ray.getDirection(), 4)) {
 						cldDst = getDistance(ray.p0, p);
@@ -112,7 +112,6 @@ public class Graphics {
 	}
 
 	static public boolean outletCollide(Ray ray, Rectangle outlet) {
-
 		Location cp = null;
 		double distance = 0;
 		double nextDst = getDistance(ray.p0, ray.p1);

@@ -11,7 +11,8 @@ import idv.lottery.picker.lotterypicker.graphic.Location;
 import idv.lottery.picker.lotterypicker.graphic.Ray;
 
 public class BallAction extends PickerAction {
-	Rectangle wallRect = new Rectangle(200, 200);
+	static Rectangle wallRect = new Rectangle(-200, -200, 400, 400);
+	static Rectangle outletRect = new Rectangle(-10, -10, 20, 20);
 	GameObject ball;
 	double velocity;
 
