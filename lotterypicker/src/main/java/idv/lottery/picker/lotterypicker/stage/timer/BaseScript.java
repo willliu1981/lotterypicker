@@ -1,6 +1,6 @@
 package idv.lottery.picker.lotterypicker.stage.timer;
 
-public abstract class BaseAction implements Action {
+public abstract class BaseScript implements Script {
 
 	boolean isSpawned;
 	boolean isEnded;

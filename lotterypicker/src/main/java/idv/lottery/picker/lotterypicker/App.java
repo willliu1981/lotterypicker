@@ -11,8 +11,8 @@ import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
 import idv.lottery.picker.lotterypicker.gameobjects.Scenes;
 import idv.lottery.picker.lotterypicker.gameobjects.balls.MainBall;
 import idv.lottery.picker.lotterypicker.graphic.Location;
-import idv.lottery.picker.lotterypicker.stage.timer.ActionSkd;
-import idv.lottery.picker.lotterypicker.stage.timer.BallAction;
+import idv.lottery.picker.lotterypicker.stage.timer.ScriptSkd;
+import idv.lottery.picker.lotterypicker.stage.timer.BallScript;
 
 /**
  * Hello world!
@@ -21,7 +21,7 @@ import idv.lottery.picker.lotterypicker.stage.timer.BallAction;
 public class App {
 	final static String START = "start";
 	public static Timer timer;
-	public static ActionSkd task = new ActionSkd();
+	public static ScriptSkd task = new ScriptSkd();
 
 	public static void main(String[] args) {
 		init();
@@ -49,15 +49,15 @@ public class App {
 		timer.schedule(task, 1000, 10);
 	}
 
-	public static void preparePickerAction(ActionSkd task) {
-		BallAction act = null;
+	public static void preparePickerAction(ScriptSkd task) {
+		BallScript act = null;
 		GameObject ball = null;
 
 		for (int i = 1; i <= 49; i++) {
 			ball = new MainBall(String.format("no.%d", i), i);
 			ball.setLocation(new Location(0, 0));
 			Scenes.createGameObjectInScene(ball);
-			act = new BallAction();
+			act = new BallScript();
 			act.setBall(ball);
 			task.addAction(act);
 			act.spawn();

@@ -1,5 +1,5 @@
 package idv.lottery.picker.lotterypicker.stage.timer;
 
-public abstract class PickerAction extends BaseAction {
+public abstract class PickerScript extends BaseScript {
 
 }

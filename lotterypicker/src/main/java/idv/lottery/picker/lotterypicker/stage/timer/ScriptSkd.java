@@ -9,28 +9,28 @@ import org.junit.jupiter.api.Test;
 
 import idv.lottery.picker.lotterypicker.stage.view.MainView;
 
-public class ActionSkd extends TimerTask {
+public class ScriptSkd extends TimerTask {
 
 	List<ActionWrap> wraps = new ArrayList<>();
 
 	public static class ActionWrap {
-		Action act;
+		Script script;
 		boolean isStarted;
 		boolean isFinalEnded;
 
-		public ActionWrap(Action act) {
+		public ActionWrap(Script script) {
 			super();
-			this.act = act;
+			this.script = script;
 		}
 
 	}
 
-	public ActionSkd() {
+	public ScriptSkd() {
 		super();
 	}
 
-	public void addAction(Action act) {
-		ActionWrap wrap = new ActionWrap(act);
+	public void addAction(Script script) {
+		ActionWrap wrap = new ActionWrap(script);
 		this.wraps.add(wrap);
 	}
 
@@ -41,18 +41,18 @@ public class ActionSkd extends TimerTask {
 			for (int i = 0; i < wraps.size(); i++) {
 				ActionWrap wrap = wraps.get(i);
 
-				if (wrap.act.isSpawned()) {
+				if (wrap.script.isSpawned()) {
 					if (!wrap.isStarted) {
-						wrap.act.start();
+						wrap.script.start();
 						wrap.isStarted = true;
 					}
 
-					if (!wrap.act.isEnded()) {
-						wrap.act.update();
+					if (!wrap.script.isEnded()) {
+						wrap.script.update();
 					}
 
-					if (wrap.act.isEnded() && !wrap.isFinalEnded) {
-						wrap.act.end();
+					if (wrap.script.isEnded() && !wrap.isFinalEnded) {
+						wrap.script.end();
 						wrap.isFinalEnded = true;
 					}
 
@@ -69,8 +69,8 @@ public class ActionSkd extends TimerTask {
 
 	@Test
 	public void test() {
-		Action a1 = new BallAction();
-		Action a2 = new BallAction();
+		Script a1 = new BallScript();
+		Script a2 = new BallScript();
 
 		this.addAction(a1);
 		this.addAction(a2);

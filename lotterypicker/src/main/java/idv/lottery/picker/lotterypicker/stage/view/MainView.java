@@ -94,11 +94,11 @@ public class MainView extends JFrame {
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
 		list = new JList(model);
-		list.setFont(new Font("新細明體", Font.PLAIN, 18));
+		list.setFont(new Font("新細明體", Font.BOLD, 24));
 		panel_1.add(list);
 		
 		JLabel lblNewLabel = new JLabel("order");
-		lblNewLabel.setFont(new Font("新細明體", Font.PLAIN, 24));
+		lblNewLabel.setFont(new Font("新細明體", Font.PLAIN, 28));
 		panel_1.add(lblNewLabel, BorderLayout.NORTH);
 	}
 	

@@ -1,6 +1,6 @@
 package idv.lottery.picker.lotterypicker.stage.timer;
 
-public interface Action   {
+public interface Script   {
 	boolean isSpawned();
 	void start();
 	void update();

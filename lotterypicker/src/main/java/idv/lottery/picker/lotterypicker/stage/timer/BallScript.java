@@ -10,7 +10,7 @@ import idv.lottery.picker.lotterypicker.graphic.Location;
 import idv.lottery.picker.lotterypicker.graphic.Ray;
 import idv.lottery.picker.lotterypicker.stage.view.MainView;
 
-public class BallAction extends PickerAction {
+public class BallScript extends PickerScript {
 	static Rectangle wallRect = new Rectangle(-200, -200, 400, 400);
 	static Rectangle outletRect = new Rectangle(-10, -10, 20, 20);
 	GameObject ball;
