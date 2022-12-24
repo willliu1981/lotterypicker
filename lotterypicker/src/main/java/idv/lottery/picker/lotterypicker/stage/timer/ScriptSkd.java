@@ -13,14 +13,14 @@ import idv.lottery.picker.lotterypicker.stage.view.MainView;
 
 public class ScriptSkd extends TimerTask {
 
-	List<ActionWrap> wraps = new ArrayList<>();
+	List<ScriptWrap> wraps = new ArrayList<>();
 
-	public static class ActionWrap {
+	public static class ScriptWrap {
 		Script script;
 		boolean isStarted;
 		boolean isFinalEnded;
 
-		public ActionWrap(Script script) {
+		public ScriptWrap(Script script) {
 			super();
 			this.script = script;
 		}
@@ -31,8 +31,8 @@ public class ScriptSkd extends TimerTask {
 		super();
 	}
 
-	public void addAction(Script script) {
-		ActionWrap wrap = new ActionWrap(script);
+	public void addScript(Script script) {
+		ScriptWrap wrap = new ScriptWrap(script);
 		this.wraps.add(wrap);
 	}
 
@@ -41,7 +41,7 @@ public class ScriptSkd extends TimerTask {
 
 		if (!wraps.isEmpty()) {
 			for (int i = 0; i < wraps.size(); i++) {
-				ActionWrap wrap = wraps.get(i);
+				ScriptWrap wrap = wraps.get(i);
 
 				if (wrap.script.isSpawned()) {
 					if (!wrap.isStarted) {
@@ -74,8 +74,8 @@ public class ScriptSkd extends TimerTask {
 		Script a1 = new BallScript();
 		Script a2 = new BallScript();
 
-		this.addAction(a1);
-		this.addAction(a2);
+		this.addScript(a1);
+		this.addScript(a2);
 
 		System.out.println("b " + this.wraps.size());
 

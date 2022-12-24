@@ -10,9 +10,12 @@ import org.junit.jupiter.api.Test;
 import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
 import idv.lottery.picker.lotterypicker.gameobjects.Scenes;
 import idv.lottery.picker.lotterypicker.gameobjects.balls.MainBall;
+import idv.lottery.picker.lotterypicker.gameobjects.publicgo.ControlGameObject;
 import idv.lottery.picker.lotterypicker.graphic.Location;
 import idv.lottery.picker.lotterypicker.stage.timer.ScriptSkd;
 import idv.lottery.picker.lotterypicker.stage.timer.scripts.BallScript;
+import idv.lottery.picker.lotterypicker.stage.timer.scripts.BaseScript;
+import idv.lottery.picker.lotterypicker.stage.timer.scripts.GameControlScript;
 
 /**
  * Hello world!
@@ -36,7 +39,8 @@ public class App {
 			input = sc.nextLine();
 			if (input.equalsIgnoreCase(START)) {
 				System.out.println("It is game time!");
-				preparePickerAction(task);
+
+				preparePickerSctipt(task);
 			} else {
 				System.out.println("Nothing happen");
 			}
@@ -49,19 +53,37 @@ public class App {
 		timer.schedule(task, 1000, 10);
 	}
 
-	public static void preparePickerAction(ScriptSkd task) {
-		BallScript script = null;
+	public static void preparePublicSctipt(ScriptSkd task) {
+		GameObject controlGO = new ControlGameObject();
+		GameControlScript controlScript = new GameControlScript();
+
+		createGameObjectInStage(task, controlScript, controlGO, true, true);
+	}
+
+	public static void preparePickerSctipt(ScriptSkd task) {
 		GameObject ball = null;
+		BallScript script = null;
 
 		for (int i = 1; i <= 49; i++) {
 			ball = new MainBall(String.format("no.%d", i), i);
 			ball.setLocation(new Location(0, 0));
-			Scenes.createGameObjectInScene(ball);
 			script = new BallScript();
-			script.setThisGameObject(ball);
-			task.addAction(script);
+
+			createGameObjectInStage(task, script, ball, true, true);
+		}
+
+	}
+
+	private static void createGameObjectInStage(ScriptSkd task, BaseScript script, GameObject go, boolean isBelongToScene,
+			boolean isSpawn) {
+		script.setThisGameObject(go);
+		if (isBelongToScene) {
+			Scenes.createGameObjectInScene(go);
+		}
+		if (isSpawn) {
 			script.spawn();
 		}
+		task.addScript(script);
 
 	}
 
