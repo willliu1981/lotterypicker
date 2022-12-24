@@ -11,4 +11,8 @@ public class Scene extends GameObject {
 		return scene;
 	}
 
+	public static void reset() {
+		scene = new Scene();
+	};
+
 }

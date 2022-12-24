@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -22,12 +20,11 @@ import idv.lottery.picker.lotterypicker.stage.timer.painters.Painters;
 public class MainView extends JFrame {
 
 	private JPanel contentPane;
-	public static JPanel stage;
-	private JLabel lblMsg;
+	public static JPanel paneStage;
 
-	Scene scene = Scene.getScene();
 	static private JList list;
 	static private DefaultListModel model = new DefaultListModel();
+	static private JButton btnStart;
 
 	/**
 	 * Launch the application.
@@ -39,8 +36,8 @@ public class MainView extends JFrame {
 					MainView frame = new MainView();
 					frame.setVisible(true);
 					App.init();
-					App.preparePublicSctipt(App.task);
-					App.preparePickerSctipt(App.task);
+					App.resetScene();
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -63,32 +60,24 @@ public class MainView extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 
-		stage = new JPanel() {
+		paneStage = new JPanel() {
 
 			@Override
 			public void paint(Graphics g) {
 				super.paint(g);
-				Painters.paint(g, scene);
+				Painters.paint(g, Scene.getScene());
 			}
 
 		};
-		panel.add(stage, BorderLayout.CENTER);
+		panel.add(paneStage, BorderLayout.CENTER);
 
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2, BorderLayout.NORTH);
 
-		JButton btnNewButton = new JButton("START");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				lblMsg.setText("Hello GUI");
-			}
-		});
-		btnNewButton.setFont(new Font("新細明體", Font.PLAIN, 18));
-		panel_2.add(btnNewButton);
+		btnStart = new JButton("START");
 
-		lblMsg = new JLabel("message");
-		lblMsg.setFont(new Font("新細明體", Font.PLAIN, 18));
-		panel_2.add(lblMsg);
+		btnStart.setFont(new Font("新細明體", Font.PLAIN, 18));
+		panel_2.add(btnStart);
 
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.EAST);
@@ -105,6 +94,15 @@ public class MainView extends JFrame {
 
 	public static void add_Qualfiy_For_Next_Round(String ballName) {
 		model.addElement(ballName);
+
+	}
+
+	public static DefaultListModel getModel() {
+		return model;
+	}
+
+	public static JButton getBtnStart() {
+		return btnStart;
 	}
 
 }

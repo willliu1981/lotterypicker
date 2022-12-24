@@ -1,6 +1,7 @@
 package idv.lottery.picker.lotterypicker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Timer;
@@ -8,6 +9,7 @@ import java.util.Timer;
 import org.junit.jupiter.api.Test;
 
 import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
+import idv.lottery.picker.lotterypicker.gameobjects.Scene;
 import idv.lottery.picker.lotterypicker.gameobjects.Scenes;
 import idv.lottery.picker.lotterypicker.gameobjects.balls.MainBall;
 import idv.lottery.picker.lotterypicker.gameobjects.publicgo.ControlGameObject;
@@ -16,6 +18,7 @@ import idv.lottery.picker.lotterypicker.stage.timer.ScriptSkd;
 import idv.lottery.picker.lotterypicker.stage.timer.scripts.BallScript;
 import idv.lottery.picker.lotterypicker.stage.timer.scripts.BaseScript;
 import idv.lottery.picker.lotterypicker.stage.timer.scripts.GameControlScript;
+import idv.lottery.picker.lotterypicker.stage.view.MainView;
 
 /**
  * Hello world!
@@ -56,6 +59,8 @@ public class App {
 	public static void preparePublicSctipt(ScriptSkd task) {
 		GameObject controlGO = new ControlGameObject();
 		GameControlScript controlScript = new GameControlScript();
+		controlScript.setModel(MainView.getModel());
+		controlScript.setStart(MainView.getBtnStart());
 
 		createGameObjectInStage(task, controlScript, controlGO, true, true);
 	}
@@ -69,13 +74,13 @@ public class App {
 			ball.setLocation(new Location(0, 0));
 			script = new BallScript();
 
-			createGameObjectInStage(task, script, ball, true, true);
+			createGameObjectInStage(task, script, ball, true, false);
 		}
 
 	}
 
-	private static void createGameObjectInStage(ScriptSkd task, BaseScript script, GameObject go, boolean isBelongToScene,
-			boolean isSpawn) {
+	private static void createGameObjectInStage(ScriptSkd task, BaseScript script, GameObject go,
+			boolean isBelongToScene, boolean isSpawn) {
 		script.setThisGameObject(go);
 		if (isBelongToScene) {
 			Scenes.createGameObjectInScene(go);
@@ -84,6 +89,23 @@ public class App {
 			script.spawn();
 		}
 		task.addScript(script);
+
+	}
+
+	static public List<BaseScript> findScript(String gameObjectName) {
+		return task.findScripts(gameObjectName);
+	}
+
+	public static void resetScene() {
+		task.clearScript();
+		MainView.getBtnStart().setText("START");
+		Arrays.stream(MainView.getBtnStart().getActionListeners())
+				.forEach(x -> MainView.getBtnStart().removeActionListener(x));
+		MainView.getModel().clear();
+
+		Scene.reset();
+		App.preparePickerSctipt(App.task);
+		App.preparePublicSctipt(App.task);
 
 	}
 

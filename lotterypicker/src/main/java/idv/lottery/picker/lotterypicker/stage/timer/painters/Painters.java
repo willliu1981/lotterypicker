@@ -9,7 +9,6 @@ import idv.lottery.picker.lotterypicker.gameobjects.balls.MainBall;
 public class Painters {
 
 	public static void paint(Graphics g, GameObject go) {
-
 		if (go instanceof MainBall) {
 			BallPainter bp = new BallPainter();
 			bp.paint(g, go);

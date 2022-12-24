@@ -41,6 +41,7 @@ public class BallScript extends PickerScript {
 			thisGameObject.setLocation(next);
 		}
 
+		////System.out.println("b script "+thisGameObject.getName() );
 		if (i > 200 && Graphics.outletCollide(ray, outletRect)) {
 			this.destroy();
 			MainView.add_Qualfiy_For_Next_Round(this.getThisGameObject().getName());
