@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 
 import idv.lottery.picker.lotterypicker.App;
 import idv.lottery.picker.lotterypicker.gameobjects.Scene;
-import idv.lottery.picker.lotterypicker.stage.timer.Painters;
+import idv.lottery.picker.lotterypicker.stage.timer.painters.Painters;
 
 public class MainView extends JFrame {
 

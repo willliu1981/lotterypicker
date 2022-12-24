@@ -7,7 +7,7 @@ import java.util.List;
 
 import idv.lottery.picker.lotterypicker.graphic.Location;
 import idv.lottery.picker.lotterypicker.stage.surfaces.Surface;
-import idv.lottery.picker.lotterypicker.stage.timer.Painter;
+import idv.lottery.picker.lotterypicker.stage.timer.painters.Painter;
 
 public class GameObject {
 

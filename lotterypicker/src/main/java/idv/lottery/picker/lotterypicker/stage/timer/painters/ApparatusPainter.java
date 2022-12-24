@@ -1,4 +1,4 @@
-package idv.lottery.picker.lotterypicker.stage.timer;
+package idv.lottery.picker.lotterypicker.stage.timer.painters;
 
 import java.awt.Graphics;
 

@@ -7,6 +7,8 @@ import java.util.TimerTask;
 
 import org.junit.jupiter.api.Test;
 
+import idv.lottery.picker.lotterypicker.stage.timer.scripts.BallScript;
+import idv.lottery.picker.lotterypicker.stage.timer.scripts.Script;
 import idv.lottery.picker.lotterypicker.stage.view.MainView;
 
 public class ScriptSkd extends TimerTask {

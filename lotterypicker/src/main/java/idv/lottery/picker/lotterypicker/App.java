@@ -12,7 +12,7 @@ import idv.lottery.picker.lotterypicker.gameobjects.Scenes;
 import idv.lottery.picker.lotterypicker.gameobjects.balls.MainBall;
 import idv.lottery.picker.lotterypicker.graphic.Location;
 import idv.lottery.picker.lotterypicker.stage.timer.ScriptSkd;
-import idv.lottery.picker.lotterypicker.stage.timer.BallScript;
+import idv.lottery.picker.lotterypicker.stage.timer.scripts.BallScript;
 
 /**
  * Hello world!
@@ -50,17 +50,17 @@ public class App {
 	}
 
 	public static void preparePickerAction(ScriptSkd task) {
-		BallScript act = null;
+		BallScript script = null;
 		GameObject ball = null;
 
 		for (int i = 1; i <= 49; i++) {
 			ball = new MainBall(String.format("no.%d", i), i);
 			ball.setLocation(new Location(0, 0));
 			Scenes.createGameObjectInScene(ball);
-			act = new BallScript();
-			act.setBall(ball);
-			task.addAction(act);
-			act.spawn();
+			script = new BallScript();
+			script.setThisGameObject(ball);
+			task.addAction(script);
+			script.spawn();
 		}
 
 	}
