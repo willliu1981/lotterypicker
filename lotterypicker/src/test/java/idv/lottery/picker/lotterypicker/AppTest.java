@@ -37,7 +37,7 @@ public class AppTest {
 		 * GameObject orElseGet2 = opt.orElseGet((opt =
 		 * Optional.of(createNewGO()))::get); System.out.println(orElseGet2.getName());
 		 */
-		System.out.println(optGameObjects.get());
+		//System.out.println(optGameObjects.get());
 
 		List<GameObject> goList = getGOList();
 		GameObject g1 = new GameObject();
