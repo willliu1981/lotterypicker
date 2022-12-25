@@ -64,7 +64,7 @@ public class GameObject {
 		});
 		//*/
 
-		//*
+		/*
 		if (this.getName().equals("SCENE")) {
 		
 			System.out.println("go1  " + optGameObjects.get().size());

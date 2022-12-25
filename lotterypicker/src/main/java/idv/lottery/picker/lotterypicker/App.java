@@ -1,5 +1,6 @@
 package idv.lottery.picker.lotterypicker;
 
+import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,25 +31,23 @@ public class App {
 	public static ScriptSkd task = new ScriptSkd();
 
 	public static void main(String[] args) {
-		init();
+		run();
+	}
+	
+	public static void run() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainView frame = new MainView();
+					frame.setVisible(true);
+					App.init();
+					App.resetScene();
 
-		System.out.println("Welcome to Lottery World");
-		System.out.printf("Please input %s\n", START);
-
-		Scanner sc = new Scanner(System.in);
-		String input = null;
-
-		while (sc.hasNextLine()) {
-			input = sc.nextLine();
-			if (input.equalsIgnoreCase(START)) {
-				System.out.println("It is game time!");
-
-				preparePickerSctipt(task);
-			} else {
-				System.out.println("Nothing happen");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-
-		}
+		});
 	}
 
 	public static void init() {
