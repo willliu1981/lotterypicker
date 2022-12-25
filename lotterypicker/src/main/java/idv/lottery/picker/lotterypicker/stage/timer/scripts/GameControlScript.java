@@ -59,9 +59,9 @@ public class GameControlScript extends BaseScript {
 	}
 	
 	private void restart() {
-		App.resetScene();
 		isStarted=false;
 		isActivated=false;
+		App.resetScene();
 		
 	}
 

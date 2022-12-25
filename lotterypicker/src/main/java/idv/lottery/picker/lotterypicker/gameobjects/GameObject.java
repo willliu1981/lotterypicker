@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
 
 import idv.lottery.picker.lotterypicker.graphic.Location;
 import idv.lottery.picker.lotterypicker.stage.surfaces.Surface;
@@ -16,6 +19,7 @@ public class GameObject {
 	protected Color coler;
 	protected Double direction;
 	protected List<GameObject> gameObjects;
+	protected Optional<List<GameObject>> optGameObjects = Optional.empty();
 	protected GameObject parentGO;
 	protected Surface surface;
 
@@ -30,6 +34,10 @@ public class GameObject {
 	}
 
 	private GameObject getParentGO() {
+		if (this instanceof Scene) {
+			return Scene.mockScene;
+		}
+
 		if (this.parentGO == null) {
 			this.parentGO = Scene.getScene();
 			this.attachTo(Scene.getScene());
@@ -45,6 +53,10 @@ public class GameObject {
 		}
 	}
 
+	public List<GameObject> getGOListx() {
+		return this.optGameObjects.orElseGet((this.optGameObjects = Optional.of(new ArrayList<>()))::get);
+	}
+
 	private List<GameObject> getGOList() {
 		if (this.gameObjects == null) {
 			return this.gameObjects = new ArrayList<>();
@@ -57,6 +69,8 @@ public class GameObject {
 	}
 
 	public void addGameObject(GameObject element) {
+		System.out.println("go1 " + this.getName());
+		System.out.println("go2 " + element.getName());
 		this.getGOList().add(element);
 	}
 

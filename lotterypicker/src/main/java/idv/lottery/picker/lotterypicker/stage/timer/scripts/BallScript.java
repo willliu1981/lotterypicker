@@ -12,7 +12,7 @@ import idv.lottery.picker.lotterypicker.stage.view.MainView;
 
 public class BallScript extends PickerScript {
 	static Rectangle wallRect = new Rectangle(-200, -200, 400, 400);
-	static Rectangle outletRect = new Rectangle(-10, -10, 20, 20);
+	static Rectangle outletRect = new Rectangle(-20, -20, 40, 40);
 	double velocity;
 	int i;
 
@@ -41,7 +41,6 @@ public class BallScript extends PickerScript {
 			thisGameObject.setLocation(next);
 		}
 
-		////System.out.println("b script "+thisGameObject.getName() );
 		if (i > 200 && Graphics.outletCollide(ray, outletRect)) {
 			this.destroy();
 			MainView.add_Qualfiy_For_Next_Round(this.getThisGameObject().getName());
