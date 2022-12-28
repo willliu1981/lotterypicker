@@ -3,7 +3,6 @@ package idv.lottery.picker.lotterypicker.tools;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-
 public class MyOptional<T> {
 	Optional<T> opt;
 
@@ -16,14 +15,18 @@ public class MyOptional<T> {
 			Runnable emptyAction) {
 
 		if (opt.isPresent()) {
-			action.accept(opt.get());
+			if (action != null) {
+				action.accept(opt.get());
+			}
 		} else {
-			emptyAction.run();
+			if (emptyAction != null) {
+				emptyAction.run();
+			}
 		}
 
 	}
 
-	
+	public T get() {
+		return opt.get();
+	}
 }
-
-

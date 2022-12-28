@@ -9,6 +9,7 @@ import java.util.Optional;
 import idv.lottery.picker.lotterypicker.graphic.Location;
 import idv.lottery.picker.lotterypicker.stage.surfaces.Surface;
 import idv.lottery.picker.lotterypicker.stage.timer.painters.Painter;
+import idv.lottery.picker.lotterypicker.tools.MyOptional;
 
 public class GameObject {
 
@@ -16,8 +17,8 @@ public class GameObject {
 	protected Location location;
 	protected Color coler;
 	protected Double direction;
-	protected List<GameObject> gameObjects;
-	protected Optional<List<GameObject>> optGameObjects = Optional.empty();
+	protected MyOptional<List<GameObject>> optGameObjects = new MyOptional<>(
+			Optional.empty());
 	protected GameObject parentGO;
 	protected Surface surface;
 
@@ -52,10 +53,11 @@ public class GameObject {
 	}
 
 	private List<GameObject> getGOList() {
-		if (this.gameObjects == null) {
-			this.gameObjects = new ArrayList<>();
-		}
-		return this.gameObjects;
+		optGameObjects.ifPresentOrElse(null,
+				() -> optGameObjects = new MyOptional<>(
+						Optional.of(new ArrayList<>())));
+
+		return optGameObjects.get();
 	}
 
 	public void paintForEach(Graphics g, Painter painter) {
