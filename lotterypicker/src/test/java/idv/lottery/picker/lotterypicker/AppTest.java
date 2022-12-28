@@ -1,62 +1,91 @@
 package idv.lottery.picker.lotterypicker;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
+import idv.lottery.picker.lotterypicker.tools.MyOptional;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest {
-	/**
-	 * Rigorous Test :-)
-	 */
-	@Test
-	public void shouldAnswerWithTrue() {
-		assertTrue(true);
-	}
 
 	static Optional<List<GameObject>> optGameObjects = Optional.empty();
 
 	public static void main(String s[]) {
-		/*
-		 * Optional<GameObject> opt = java.util.Optional.empty();
-		 * 
-		 * GameObject orElseGet = opt.orElseGet((opt =
-		 * Optional.of(createNewGO()))::get); System.out.println(orElseGet.getName());
-		 * System.out.println(opt.get().getName());
-		 * 
-		 * // opt.get().setName("go2"); opt.empty();
-		 * 
-		 * GameObject orElseGet2 = opt.orElseGet((opt =
-		 * Optional.of(createNewGO()))::get); System.out.println(orElseGet2.getName());
-		 */
-		//System.out.println(optGameObjects.get());
 
 		List<GameObject> goList = getGOList();
 		GameObject g1 = new GameObject();
-		g1.setName("g1");
+		g1.setName("G1");
 		goList.add(g1);
-		System.out.println(goList);
-		
+		System.out.println(goList.get(0).getName());
+
 		List<GameObject> goList2 = getGOList();
-		System.out.println(goList2);
+		System.out.println(goList2.get(0).getName());
+
+		List<GameObject> goList3 = Collections.emptyList();
+		//goList3.add(g1);
+		//ameObject gameObject = goList3.get(0);
+		System.out.println(goList3 == null);
+
+		Optional<List<GameObject>> golst = Optional.empty();
+		List<GameObject> orElseGet = golst.orElseGet(ArrayList::new);
+		System.out.println(orElseGet.hashCode());
 
 	}
 
 	private static List<GameObject> getGOList() {
-		return optGameObjects.orElseGet((optGameObjects = Optional.of(new ArrayList<>()))::get);
+
+		optGameObjects.orElse(getGOList());
+
+		return optGameObjects.orElseGet(
+				(optGameObjects = Optional.of(new ArrayList<>()))::get);
 	}
 
-	public static GameObject createNewGO() {
-		GameObject go = new GameObject();
-		go.setName("go1");
-		return go;
+	@Test
+	public void test() {
+		HashMap<Integer, String> map = new HashMap<>();
+		map.put(1, "apple");
+		map.put(2, "banana");
+		map.put(3, "kiwi");
+
+		List<String> list = map.values().stream().collect(Collectors.toList());
+
+		list.forEach(System.out::println);
+
 	}
+	
+	@Test
+	public void test2() {
+		Consumer<String> stringConsumer = (s) -> System.out
+				.println("The value stored in Optional object - " + s);
+		Runnable runnable = () -> System.out
+				.println("No value stored in the Optional object");
+
+		String test = "hello-educative";
+		Optional<String> stringOptional = Optional.of(test);
+
+		MyOptional<String> myOptional = new MyOptional<String>(stringOptional);
+
+		System.out.println("When a value is present - ");
+		myOptional.ifPresentOrElse(stringConsumer, runnable);
+
+		System.out.println("----------");
+		test = null;
+
+		System.out.println("When no value is present - ");
+
+		stringOptional = Optional.of(test);
+		myOptional = new MyOptional<String>(stringOptional);
+		myOptional.ifPresentOrElse(stringConsumer, runnable);
+	}
+
 }

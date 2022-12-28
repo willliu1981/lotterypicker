@@ -51,55 +51,18 @@ public class GameObject {
 		}
 	}
 
-	public List<GameObject> getGOList() {
-
-		/*
-		List<GameObject> orElseGet = this.optGameObjects.orElseGet(
-				(this.optGameObjects = Optional.of(new ArrayList<>()))::get);
-		//*/
-
-		//*
-		List<GameObject> orElseGet2 = this.optGameObjects.orElseGet(() -> {
-			return (this.optGameObjects = Optional.of(new ArrayList<>())).get();
-		});
-		//*/
-
-		/*
-		if (this.getName().equals("SCENE")) {
-		
-			System.out.println("go1  " + optGameObjects.get().size());
-			System.out.println("go2 " + optGameObjects.get().hashCode());
-		}
-		//*/
-		return this.optGameObjects.get();
-	}
-
-	private List<GameObject> getGOListx() {
+	private List<GameObject> getGOList() {
 		if (this.gameObjects == null) {
 			this.gameObjects = new ArrayList<>();
-		}
-		if (this.getName().equals("SCENE")) {
-
-			System.out.println("go  " + gameObjects.size());
-			System.out.println("go2 " + gameObjects.hashCode());
 		}
 		return this.gameObjects;
 	}
 
 	public void paintForEach(Graphics g, Painter painter) {
-		/*
-		if (this.getName().equals("SCENE")) {
-		
-			System.out.println("go11  " + optGameObjects.get().size());
-			System.out.println("go22 " + optGameObjects.get().hashCode());
-		}
-		//*/
 		this.getGOList().forEach(x -> painter.paint(g, x));
 	}
 
 	public void addGameObject(GameObject element) {
-		////System.out.println("go1 " + this.getName());
-		////System.out.println("go2 " + element.getName());
 		this.getGOList().add(element);
 	}
 
