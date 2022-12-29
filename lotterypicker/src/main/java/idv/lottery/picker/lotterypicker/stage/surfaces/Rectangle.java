@@ -4,8 +4,18 @@ import idv.lottery.picker.lotterypicker.graphic.Location;
 
 public class Rectangle extends Shape {
 
-	public Rectangle(Location location) {
-		super(location);
+	double height;
+
+	public Rectangle(Location location, double length) {
+		super(location, length);
+	}
+
+	public double getHeight() {
+		return this.height == 0 ? this.length : height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
 	}
 
 }

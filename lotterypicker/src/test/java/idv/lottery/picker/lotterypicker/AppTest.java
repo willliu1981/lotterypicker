@@ -57,8 +57,11 @@ public class AppTest {
 		map.put(2, "banana");
 		map.put(3, "kiwi");
 
-		List<String> list = map.values().stream().collect(Collectors.toList());
+		//List<String> list = map.values().stream().collect(Collectors.toList());
 
+		List<String> list=new ArrayList<>();
+		list.addAll(map.values());
+		
 		list.forEach(System.out::println);
 
 	}

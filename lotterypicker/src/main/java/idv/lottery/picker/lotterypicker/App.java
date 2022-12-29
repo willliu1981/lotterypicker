@@ -1,5 +1,6 @@
 package idv.lottery.picker.lotterypicker;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,9 +12,13 @@ import org.junit.jupiter.api.Test;
 import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
 import idv.lottery.picker.lotterypicker.gameobjects.Scene;
 import idv.lottery.picker.lotterypicker.gameobjects.Scenes;
+import idv.lottery.picker.lotterypicker.gameobjects.apparatuses.Outlet;
 import idv.lottery.picker.lotterypicker.gameobjects.balls.MainBall;
 import idv.lottery.picker.lotterypicker.gameobjects.publicgo.ControlGameObject;
 import idv.lottery.picker.lotterypicker.graphic.Location;
+import idv.lottery.picker.lotterypicker.stage.surfaces.Rectangle;
+import idv.lottery.picker.lotterypicker.stage.surfaces.Shape;
+import idv.lottery.picker.lotterypicker.stage.surfaces.Surface;
 import idv.lottery.picker.lotterypicker.stage.timer.ScriptSkd;
 import idv.lottery.picker.lotterypicker.stage.timer.scripts.BallScript;
 import idv.lottery.picker.lotterypicker.stage.timer.scripts.BaseScript;
@@ -32,7 +37,7 @@ public class App {
 	public static void main(String[] args) {
 		run();
 	}
-	
+
 	public static void run() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -64,29 +69,43 @@ public class App {
 	}
 
 	public static void preparePickerSctipt(ScriptSkd task) {
+		GameObject outlet = new Outlet();
+		Surface surface = new Surface();
+		Shape shape = new Rectangle(new Location(-20, -20), 40);
+		shape.setColor(Color.red);
+		shape.setFilled(false);
+		surface.setShape(shape);
+		outlet.setSurface(surface);
+		outlet.setLocation(new Location(0, 0));
+		outlet.setName("OUTLET");
+		createGameObjectInStage(task, null, outlet, true, null);
+
 		GameObject ball = null;
-		BallScript script = null;
+		BallScript ballScript = null;
 
 		for (int i = 1; i <= 49; i++) {
 			ball = new MainBall(String.format("no.%d", i), i);
 			ball.setLocation(new Location(0, 0));
-			script = new BallScript();
+			ballScript = new BallScript();
 
-			createGameObjectInStage(task, script, ball, true, false);
+			createGameObjectInStage(task, ballScript, ball, true, false);
 		}
 
 	}
 
-	private static void createGameObjectInStage(ScriptSkd task, BaseScript script, GameObject go,
-			boolean isBelongToScene, boolean isSpawn) {
-		script.setThisGameObject(go);
+	private static void createGameObjectInStage(ScriptSkd task,
+			BaseScript script, GameObject go, boolean isBelongToScene,
+			Boolean isSpawn) {
+		if (script != null) {
+			script.setThisGameObject(go);
+			if (isSpawn) {
+				script.spawn();
+			}
+			task.addScript(script);
+		}
 		if (isBelongToScene) {
 			Scenes.createGameObjectInScene(go);
 		}
-		if (isSpawn) {
-			script.spawn();
-		}
-		task.addScript(script);
 
 	}
 

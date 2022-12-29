@@ -17,8 +17,6 @@ public class Painters {
 			ap.paint(g, go);
 		}
 
-		////System.out.println("pter1 "+go.getName());
-		////System.out.println("pter2 "+go.getGOList());
 		go.paintForEach(g, (gfx, ele) -> {
 			Painters.paint(gfx, ele);
 		});
