@@ -71,12 +71,12 @@ public class App {
 	public static void preparePickerSctipt(ScriptSkd task) {
 		GameObject outlet = new Outlet();
 		Surface surface = new Surface();
-		Shape shape = new Rectangle(new Location(-20, -20), 40);
+		Shape shape = new Rectangle(new Location(-10, -10), 20);
 		shape.setColor(Color.red);
 		shape.setFilled(false);
 		surface.setShape(shape);
 		outlet.setSurface(surface);
-		outlet.setLocation(new Location(0, 0));
+		outlet.setLocation(new Location(50, 100));
 		outlet.setName("OUTLET");
 		createGameObjectInStage(task, null, outlet, true, null);
 
@@ -87,6 +87,7 @@ public class App {
 			ball = new MainBall(String.format("no.%d", i), i);
 			ball.setLocation(new Location(0, 0));
 			ballScript = new BallScript();
+			BallScript.setOutlet(outlet);
 
 			createGameObjectInStage(task, ballScript, ball, true, false);
 		}

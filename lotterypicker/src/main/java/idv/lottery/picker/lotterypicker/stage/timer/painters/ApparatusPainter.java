@@ -21,9 +21,7 @@ public class ApparatusPainter implements Painter {
 					+ shape.getLocation().getY());
 			int w = (int) (rect.getHeight());
 			int h = (int) (rect.getLength());
-			System.out.printf("ap name=%s, x=%d, y=%d, w=%d, h=%d\n",
-					go.getName(), x, y, w, h);
-			g.drawRect(x + 400, y + 400, w, h);
+			g.drawRect(x * 2 + 400, y * 2 + 400, w * 2, h * 2);
 		}
 
 	}
