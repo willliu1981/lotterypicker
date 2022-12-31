@@ -25,14 +25,13 @@ public class GameControlScript extends BaseScript {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!isActivated) {
+				if (!isActivated) {
 					isStarted = true;
 					btnStart.setText("RESTART");
-				}else {
+				} else {
 					btnStart.setText("START");
 					restart();
 				}
-				
 
 			}
 
@@ -44,8 +43,12 @@ public class GameControlScript extends BaseScript {
 	public void update() {
 		if (isStarted && !isActivated) {
 			isActivated = true;
-			List<BaseScript> find = App.findScript("BallScript");
-			find.stream().forEach(x ->x.spawn());
+			List<BaseScript> findBall = App.findScript("BallScript");
+			findBall.stream().forEach(x -> x.spawn());
+
+			List<BaseScript> findScript = App.findScript("OutletRandomScript");
+			findScript.stream().forEach(x -> x.spawn());
+
 		}
 
 	}
@@ -57,12 +60,12 @@ public class GameControlScript extends BaseScript {
 	public void setStart(JButton start) {
 		this.btnStart = start;
 	}
-	
+
 	private void restart() {
-		isStarted=false;
-		isActivated=false;
+		isStarted = false;
+		isActivated = false;
 		App.resetScene();
-		
+
 	}
 
 }

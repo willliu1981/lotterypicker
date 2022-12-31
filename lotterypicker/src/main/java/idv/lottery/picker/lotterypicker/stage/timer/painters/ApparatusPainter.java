@@ -1,6 +1,8 @@
 package idv.lottery.picker.lotterypicker.stage.timer.painters;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import idv.lottery.picker.lotterypicker.gameobjects.GameObject;
 import idv.lottery.picker.lotterypicker.stage.surfaces.Rectangle;
@@ -12,6 +14,8 @@ public class ApparatusPainter implements Painter {
 	public void paint(Graphics g, GameObject go) {
 		Shape shape = go.getSurface().getShape();
 		g.setColor(shape.getColor());
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setStroke(new BasicStroke(4));
 
 		if (shape instanceof Rectangle) {
 			Rectangle rect = (Rectangle) shape;

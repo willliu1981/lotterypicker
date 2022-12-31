@@ -7,7 +7,7 @@ public abstract class Ball extends GameObject {
 
 	public Ball(String name, Integer number) {
 		super();
-		Name = name;
+		this.name = name;
 		this.number = number;
 	}
 

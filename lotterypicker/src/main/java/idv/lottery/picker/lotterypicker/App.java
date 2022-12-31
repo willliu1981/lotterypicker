@@ -23,6 +23,7 @@ import idv.lottery.picker.lotterypicker.stage.timer.ScriptSkd;
 import idv.lottery.picker.lotterypicker.stage.timer.scripts.BallScript;
 import idv.lottery.picker.lotterypicker.stage.timer.scripts.BaseScript;
 import idv.lottery.picker.lotterypicker.stage.timer.scripts.GameControlScript;
+import idv.lottery.picker.lotterypicker.stage.timer.scripts.OutletRandomScript;
 import idv.lottery.picker.lotterypicker.stage.view.MainView;
 
 /**
@@ -70,20 +71,21 @@ public class App {
 
 	public static void preparePickerSctipt(ScriptSkd task) {
 		GameObject outlet = new Outlet();
+		BaseScript outletScript = new OutletRandomScript();
 		Surface surface = new Surface();
 		Shape shape = new Rectangle(new Location(-10, -10), 20);
 		shape.setColor(Color.red);
 		shape.setFilled(false);
 		surface.setShape(shape);
 		outlet.setSurface(surface);
-		outlet.setLocation(new Location(50, 100));
+		outlet.setLocation(new Location(0, 0));
 		outlet.setName("OUTLET");
-		createGameObjectInStage(task, null, outlet, true, null);
+		createGameObjectInStage(task, outletScript, outlet, true, false);
 
 		GameObject ball = null;
 		BallScript ballScript = null;
 
-		for (int i = 1; i <= 49; i++) {
+		for (int i = 1; i <= 249; i++) {
 			ball = new MainBall(String.format("no.%d", i), i);
 			ball.setLocation(new Location(0, 0));
 			ballScript = new BallScript();
@@ -99,6 +101,7 @@ public class App {
 			Boolean isSpawn) {
 		if (script != null) {
 			script.setThisGameObject(go);
+			go.addScript(script);
 			if (isSpawn) {
 				script.spawn();
 			}

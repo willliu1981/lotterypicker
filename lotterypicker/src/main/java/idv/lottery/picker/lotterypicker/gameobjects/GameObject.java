@@ -9,15 +9,18 @@ import java.util.Optional;
 import idv.lottery.picker.lotterypicker.graphic.Location;
 import idv.lottery.picker.lotterypicker.stage.surfaces.Surface;
 import idv.lottery.picker.lotterypicker.stage.timer.painters.Painter;
+import idv.lottery.picker.lotterypicker.stage.timer.scripts.BaseScript;
 import idv.lottery.picker.lotterypicker.tools.MyOptional;
 
 public class GameObject {
 
-	protected String Name;
+	protected String name;
 	protected Location location;
 	protected Color coler;
 	protected Double direction;
 	protected MyOptional<List<GameObject>> optGameObjects = new MyOptional<>(
+			Optional.empty());
+	protected MyOptional<List<BaseScript>> optScropts = new MyOptional<>(
 			Optional.empty());
 	protected GameObject parentGO;
 	protected Surface surface;
@@ -52,7 +55,7 @@ public class GameObject {
 		}
 	}
 
-	private List<GameObject> getGOList() {
+	private List<GameObject> getGameObjectList() {
 		optGameObjects.ifPresentOrElse(null,
 				() -> optGameObjects = new MyOptional<>(
 						Optional.of(new ArrayList<>())));
@@ -60,16 +63,26 @@ public class GameObject {
 		return optGameObjects.get();
 	}
 
+	public void addScript(BaseScript script) {
+		this.getScriptList().add(script);
+	}
+
+	private List<BaseScript> getScriptList() {
+		optScropts.ifPresentOrElse(null, () -> optScropts = new MyOptional<>(
+				Optional.of(new ArrayList<>())));
+		return optScropts.get();
+	}
+
 	public void paintForEach(Graphics g, Painter painter) {
-		this.getGOList().forEach(x -> painter.paint(g, x));
+		this.getGameObjectList().forEach(x -> painter.paint(g, x));
 	}
 
 	public void addGameObject(GameObject element) {
-		this.getGOList().add(element);
+		this.getGameObjectList().add(element);
 	}
 
 	public void removeGameObject(GameObject element) {
-		this.getGOList().remove(element);
+		this.getGameObjectList().remove(element);
 	}
 
 	public Location getLocation() {
@@ -81,11 +94,11 @@ public class GameObject {
 	}
 
 	public String getName() {
-		return Name;
+		return this.name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public Color getColer() {

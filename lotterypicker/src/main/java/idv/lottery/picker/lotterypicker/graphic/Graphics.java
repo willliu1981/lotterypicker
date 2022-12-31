@@ -10,14 +10,14 @@ public class Graphics {
 	/**
 	 * 
 	 * @param p0 原點
-	 * @param d  方向
-	 * @param v  速度
+	 * @param degree  方向
+	 * @param velocity  速度
 	 * @return 下一個目標位置
 	 */
 
-	static public Location nextLocation(Location p0, double d, double v) {
-		double px1 = p0.getX() + v * Math.cos(Math.toRadians(d));
-		double py1 = p0.getY() + v * Math.sin(Math.toRadians(d));
+	static public Location nextLocation(Location p0, double degree, double velocity) {
+		double px1 = p0.getX() + velocity * Math.cos(Math.toRadians(degree));
+		double py1 = p0.getY() + velocity * Math.sin(Math.toRadians(degree));
 
 		Location p1 = new Location(px1, py1);
 		return p1;
@@ -112,47 +112,47 @@ public class Graphics {
 	}
 
 	static public boolean outletCollide(Ray ray, Rectangle outlet) {
-		Location cp = null;
+		Location collidePoint = null;
 		double distance = 0;
 		double nextDst = getDistance(ray.p0, ray.p1);
 		int i = 0;
 		while (i < 4) {
 			switch (i) {
 			case 1:
-				cp = collidePoint(ray.p0, ray.p1, new Location(outlet.x, outlet.y),
+				collidePoint = collidePoint(ray.p0, ray.p1, new Location(outlet.x, outlet.y),
 						new Location(outlet.x + outlet.width, outlet.y));
-				if (cp.x >= outlet.x && cp.x <= outlet.x + outlet.width) {
-					distance = getDistance(ray.p0, cp);
+				if (collidePoint.x >= outlet.x && collidePoint.x <= outlet.x + outlet.width) {
+					distance = getDistance(ray.p0, collidePoint);
 					if (distance < nextDst) {
 						return true;
 					}
 				}
 				break;
 			case 2:
-				cp = collidePoint(ray.p0, ray.p1, new Location(outlet.x + outlet.width, outlet.y),
+				collidePoint = collidePoint(ray.p0, ray.p1, new Location(outlet.x + outlet.width, outlet.y),
 						new Location(outlet.x + outlet.width, outlet.y + outlet.height));
-				if (cp.y >= outlet.y && cp.y <= outlet.y + outlet.height) {
-					distance = getDistance(ray.p0, cp);
+				if (collidePoint.y >= outlet.y && collidePoint.y <= outlet.y + outlet.height) {
+					distance = getDistance(ray.p0, collidePoint);
 					if (distance < nextDst) {
 						return true;
 					}
 				}
 				break;
 			case 3:
-				cp = collidePoint(ray.p0, ray.p1, new Location(outlet.x, outlet.y + outlet.height),
+				collidePoint = collidePoint(ray.p0, ray.p1, new Location(outlet.x, outlet.y + outlet.height),
 						new Location(outlet.x + outlet.width, outlet.y + outlet.height));
-				if (cp.x >= outlet.x && cp.x <= outlet.x + outlet.width) {
-					distance = getDistance(ray.p0, cp);
+				if (collidePoint.x >= outlet.x && collidePoint.x <= outlet.x + outlet.width) {
+					distance = getDistance(ray.p0, collidePoint);
 					if (distance < nextDst) {
 						return true;
 					}
 				}
 				break;
 			case 4:
-				cp = collidePoint(ray.p0, ray.p1, new Location(outlet.x, outlet.y),
+				collidePoint = collidePoint(ray.p0, ray.p1, new Location(outlet.x, outlet.y),
 						new Location(outlet.x, outlet.y + outlet.height));
-				if (cp.y >= outlet.y && cp.y <= outlet.y + outlet.height) {
-					distance = getDistance(ray.p0, cp);
+				if (collidePoint.y >= outlet.y && collidePoint.y <= outlet.y + outlet.height) {
+					distance = getDistance(ray.p0, collidePoint);
 					if (distance < nextDst) {
 						return true;
 					}
